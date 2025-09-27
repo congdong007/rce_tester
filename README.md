@@ -1,8 +1,8 @@
-# rce_fuzzer / rce_tester
+# rce_tester
 
 ## 1️⃣ Project Overview
 
-`rce_fuzzer` is a **multi-threaded HTTP Remote Command Execution (RCE) testing tool**. Its main features include:
+`rce_tester` is a **multi-threaded HTTP Remote Command Execution (RCE) testing tool**. Its main features include:
 
 - Support **single URL testing** or **batch URL testing**
 - Supports **POST data templates** with automatic `FUZZ` placeholder replacement
@@ -19,7 +19,7 @@
 ## 2️⃣ Directory Structure
 
 ```
-rce_fuzzer/
+rce_tester/
 ├── cmd/
 │   └── main.go           # Entry point
 ├── config/
@@ -43,14 +43,14 @@ rce_fuzzer/
 2. Clone the repository:
 
 ```
-git clone https://github.com/yourusername/rce_fuzzer.git
-cd rce_fuzzer
+git clone https://github.com/yourusername/rce_tester.git
+cd rce_tester
 ```
 
 1. Build the project:
 
 ```
-go build -o rce_fuzzer ./cmd
+go build -o rce_tester ./cmd
 ```
 
 Or run directly:
@@ -82,7 +82,13 @@ go run ./cmd
 ### Single URL Testing
 
 ```
-./rce_fuzzer -u "http://dvwa/vulnerabilities/exec/?ip=FUZZ" -pf payloads.txt -kf keywords.txt -t 10 -o results.txt
+./rce_tester -u "http://dvwa/vulnerabilities/exec/?ip=FUZZ&Submit=Submit&user_token=xxxx" -pf payloads.txt -kf keywords.txt -t 10 -o results.txt
+```
+
+
+
+```
+./rce_tester -u "http://dvwa/vulnerabilities/exec/" -d "ip=127.0.0.1FUZZ&Submit=Submit&user_token=926f38fc116ddc65cc4798fa6c5e4139" -cookie "Cookie: security=low; PHPSESSID=r074ijj9guv99pg0b74jnu9274" -pf payloads.txt -kf keywords.txt -t 10 -o results.txt
 ```
 
 - `FUZZ` will be replaced with each payload
@@ -94,7 +100,7 @@ go run ./cmd
 ### Batch URL Testing
 
 ```
-./rce_fuzzer -uf urls.txt -pf payloads.txt -kf keywords.txt -t 10 -max-uf 8 -o results.txt
+./rce_tester -uf urls.txt -pf payloads.txt -kf keywords.txt -t 10 -max-uf 8 -o results.txt
 ```
 
 - Each line in `urls.txt` must contain a `FUZZ` placeholder:

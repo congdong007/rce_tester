@@ -1,6 +1,7 @@
 package util
 
 import (
+	"fmt"
 	"os"
 )
 
@@ -13,7 +14,11 @@ func WriteResults(filename string, results <-chan string) error {
 	defer f.Close()
 
 	for r := range results {
-		_, _ = f.WriteString(r)
+		_, err = f.WriteString(r + "\n")
+		if err != nil {
+			fmt.Printf("write into error :%s,%s\n", filename, err)
+			return nil
+		}
 	}
 	return nil
 }
